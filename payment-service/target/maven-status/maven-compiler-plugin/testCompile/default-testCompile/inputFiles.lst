@@ -1,0 +1,8 @@
+C:\repositorio\grpc-microservices\payment-service\src\test\java\com\example\payment\repository\PaymentRepositoryTest.java
+C:\repositorio\grpc-microservices\payment-service\src\test\java\com\example\payment\service\PaymentNotificationSenderTest.java
+C:\repositorio\grpc-microservices\payment-service\src\test\java\com\example\payment\service\PaymentServiceTest.java
+C:\repositorio\grpc-microservices\payment-service\src\test\java\com\example\payment\client\NotificationClientTest.java
+C:\repositorio\grpc-microservices\payment-service\src\test\java\com\example\payment\interceptor\ExceptionHandlerInterceptorTest.java
+C:\repositorio\grpc-microservices\payment-service\src\test\java\com\example\payment\mapper\PaymentMapperTest.java
+C:\repositorio\grpc-microservices\payment-service\src\test\java\com\example\payment\grpc\PaymentGrpcServiceTest.java
+C:\repositorio\grpc-microservices\payment-service\src\test\java\com\example\payment\interceptor\LoggingInterceptorTest.java

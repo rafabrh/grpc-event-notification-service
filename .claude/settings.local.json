@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rm -f build.gradle settings.gradle gradlew gradlew.bat)",
+      "Bash(rm -f proto-contracts/build.gradle payment-service/build.gradle notification-service/build.gradle)",
+      "Bash(cd:*)",
+      "Bash(mvn --version)",
+      "Bash(mvn wrapper:wrapper -Dmaven=3.9.11)",
+      "Bash(./mvnw clean:*)",
+      "Bash(./mvnw test:*)",
+      "Bash(./mvnw install:*)",
+      "Bash(./mvnw compile:*)",
+      "Bash(mvn test:*)"
+    ]
+  }
+}

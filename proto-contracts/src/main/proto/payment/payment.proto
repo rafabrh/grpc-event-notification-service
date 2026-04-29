@@ -1,0 +1,98 @@
+syntax = "proto3";
+
+package payment;
+
+option java_multiple_files = true;
+option java_package = "com.example.grpc.payment";
+option java_outer_classname = "PaymentProto";
+
+import "google/protobuf/timestamp.proto";
+import "common/common.proto";
+
+// Enums
+enum PaymentMethod {
+  PAYMENT_METHOD_UNSPECIFIED = 0;
+  CREDIT_CARD = 1;
+  DEBIT_CARD = 2;
+  PIX = 3;
+  BOLETO = 4;
+}
+
+enum PaymentStatus {
+  PAYMENT_STATUS_UNSPECIFIED = 0;
+  PENDING = 1;
+  PROCESSING = 2;
+  APPROVED = 3;
+  REJECTED = 4;
+  CANCELLED = 5;
+}
+
+// Messages
+message Money {
+  string currency = 1;  // BRL, USD, EUR
+  int64 amount_cents = 2;  // valor em centavos para evitar float
+}
+
+message PaymentRequest {
+  string customer_id = 1;
+  string order_id = 2;
+  Money amount = 3;
+  PaymentMethod method = 4;
+  map<string, string> metadata = 5;  // dados extras (IP, device, etc)
+}
+
+message PaymentResponse {
+  string payment_id = 1;
+  PaymentStatus status = 2;
+  string authorization_code = 3;
+  google.protobuf.Timestamp created_at = 4;
+  common.ResponseMetadata metadata = 5;
+}
+
+message GetPaymentRequest {
+  string payment_id = 1;
+}
+
+message ListPaymentsRequest {
+  string customer_id = 1;
+  common.PageRequest page = 2;
+  // filtros opcionais
+  optional PaymentStatus status_filter = 3;
+  optional google.protobuf.Timestamp from_date = 4;
+  optional google.protobuf.Timestamp to_date = 5;
+}
+
+message ListPaymentsResponse {
+  repeated PaymentResponse payments = 1;
+  common.PageResponse page = 2;
+}
+
+message CancelPaymentRequest {
+  string payment_id = 1;
+  string reason = 2;
+}
+
+message CancelPaymentResponse {
+  string payment_id = 1;
+  PaymentStatus status = 2;
+  common.ResponseMetadata metadata = 3;
+}
+
+// Service definition
+service PaymentService {
+  // Unário: criar pagamento
+  rpc ProcessPayment(PaymentRequest)
+      returns (PaymentResponse);
+  
+  // Unário: consultar pagamento
+  rpc GetPayment(GetPaymentRequest)
+      returns (PaymentResponse);
+  
+  // Server streaming: listar pagamentos paginados
+  rpc ListPayments(ListPaymentsRequest)
+      returns (stream PaymentResponse);
+  
+  // Unário: cancelar pagamento
+  rpc CancelPayment(CancelPaymentRequest)
+      returns (CancelPaymentResponse);
+}

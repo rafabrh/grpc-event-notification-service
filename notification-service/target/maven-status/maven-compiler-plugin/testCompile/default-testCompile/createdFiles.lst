@@ -1,0 +1,3 @@
+com\example\notification\grpc\NotificationGrpcServiceTest.class
+com\example\notification\repository\NotificationRepositoryTest.class
+com\example\notification\service\NotificationServiceTest.class

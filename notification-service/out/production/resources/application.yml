@@ -1,0 +1,44 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: notification-service
+    version: 1.0.0
+
+# gRPC Server config
+grpc:
+  server:
+    port: 9091
+    max-inbound-message-size: 4MB
+    keep-alive-time: 30s
+    keep-alive-timeout: 10s
+    permit-keep-alive-without-calls: true
+    enable-reflection: true
+    security:
+      enabled: false  # TLS em prod
+
+# Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    tags:
+      application: ${spring.application.name}
+
+# Logging
+logging:
+  level:
+    root: INFO
+    com.example.notification: DEBUG
+    io.grpc: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"

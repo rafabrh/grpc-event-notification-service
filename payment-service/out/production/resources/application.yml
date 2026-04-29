@@ -1,0 +1,80 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: payment-service
+    version: 1.0.0
+
+# gRPC Server config
+grpc:
+  server:
+    port: 9090
+    # Timeouts e limites para produção
+    max-inbound-message-size: 4MB
+    # Keep-alive para detectar conexões mortas
+    keep-alive-time: 30s
+    keep-alive-timeout: 10s
+    permit-keep-alive-without-calls: true
+    # Habilita reflection para ferramentas como grpcurl
+    enable-reflection: true
+    # Security (em prod usar TLS)
+    security:
+      enabled: false  # mudar para true em prod
+      # certificate-chain: classpath:certs/server.crt
+      # private-key: classpath:certs/server.key
+
+# gRPC Client config (para chamar Notification Service)
+  client:
+    notification-service:
+      address: 'static://localhost:9091'
+      negotiation-type: PLAINTEXT  # TLS em prod
+      # Deadline padrão para todas as chamadas
+      deadline: 5s
+      # Retry policy
+      enable-keep-alive: true
+      keep-alive-time: 30s
+      keep-alive-timeout: 10s
+
+# Actuator para health checks
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    tags:
+      application: ${spring.application.name}
+
+# Resilience4j Circuit Breaker
+resilience4j:
+  circuitbreaker:
+    instances:
+      notificationService:
+        sliding-window-size: 10
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 10s
+        permitted-number-of-calls-in-half-open-state: 3
+        automatic-transition-from-open-to-half-open-enabled: true
+  retry:
+    instances:
+      notificationService:
+        max-attempts: 3
+        wait-duration: 500ms
+        retry-exceptions:
+          - io.grpc.StatusRuntimeException
+
+# Logging estruturado
+logging:
+  level:
+    root: INFO
+    com.example.payment: DEBUG
+    io.grpc: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"

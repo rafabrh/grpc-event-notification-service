@@ -1,0 +1,12 @@
+com\example\notification\service\NotificationService.class
+com\example\notification\NotificationServiceApplication.class
+com\example\notification\repository\NotificationRepository.class
+com\example\notification\domain\Notification.class
+com\example\notification\grpc\NotificationGrpcService.class
+com\example\notification\grpc\NotificationGrpcService$2.class
+com\example\notification\grpc\NotificationGrpcService$3.class
+com\example\notification\domain\Notification$Channel.class
+com\example\notification\grpc\NotificationGrpcService$1.class
+com\example\notification\domain\Notification$Priority.class
+com\example\notification\domain\Notification$NotificationBuilder.class
+com\example\notification\domain\Notification$Status.class
