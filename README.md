@@ -40,7 +40,7 @@ Sistema de microservicos comunicando via gRPC.
  |  | Repository| | Notific- |   |                  |
  |  | (memory)  | | ation-   +---|------------------+
  |  +-----------+ | Sender   |   |  @CircuitBreaker
- |                | @Retry    |   |  @Retry
+ |                | @Retry   |   |  @Retry
  |                +-----+----+   |  Deadline: 5s
  |                      |        |
  |                      v        |
