@@ -24,7 +24,7 @@ Sistema de microservicos comunicando via gRPC.
  |             |                 |   |             v                 |
  |             v                 |   |  +-------------------------+  |
  |  +-------------------------+  |   |  |   NotificationService   |  |
- |  |  PaymentGrpcService     |  |   |  |   (logica de negocio)  |  |
+ |  |  PaymentGrpcService     |  |   |  |   (logica de negocio)   |   |
  |  |  (camada gRPC)          |  |   |  +----------+--------------+  |
  |  +----------+--------------+  |   |             |                 |
  |             |                 |   |             v                 |
@@ -60,20 +60,20 @@ Sistema de microservicos comunicando via gRPC.
     |  1. ProcessPayment()   |                                     |
     |----------------------->|                                     |
     |                        |                                     |
-    |                  2. LoggingInterceptor                        |
+    |                  2. LoggingInterceptor                       |
     |                     gera request-id                          |
     |                     inicia timer                             |
     |                        |                                     |
-    |                  3. PaymentGrpcService                        |
+    |                  3. PaymentGrpcService                       |
     |                     valida input                             |
     |                     converte proto -> domain                 |
     |                        |                                     |
-    |                  4. PaymentService                            |
+    |                  4. PaymentService                           |
     |                     cria Payment                             |
     |                     simula aprovacao/rejeicao                |
     |                     salva no repository                      |
     |                        |                                     |
-    |                  5. PaymentNotificationSender                 |
+    |                  5. PaymentNotificationSender                |
     |                     @CircuitBreaker + @Retry                 |
     |                        |                                     |
     |                        |  6. SendNotification()              |
@@ -85,7 +85,7 @@ Sistema de microservicos comunicando via gRPC.
     |  8. PaymentResponse    |                                     |
     |<-----------------------|                                     |
     |                        |                                     |
-    |                  9. LoggingInterceptor                        |
+    |                  9. LoggingInterceptor                       |
     |                     calcula latencia                         |
     |                     adiciona request-id nos trailers         |
 ```
