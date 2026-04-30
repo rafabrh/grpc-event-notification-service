@@ -1,6 +1,6 @@
 # gRPC Microservices - Payment & Notification System
 
-Sistema de microservicos comunicando via gRPC com padroes de producao.
+Sistema de microservicos comunicando via gRPC.
 
 ## Arquitetura
 
