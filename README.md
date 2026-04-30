@@ -24,7 +24,7 @@ Sistema de microservicos comunicando via gRPC.
  |             |                 |   |             v                 |
  |             v                 |   |  +-------------------------+  |
  |  +-------------------------+  |   |  |   NotificationService   |  |
- |  |  PaymentGrpcService     |  |   |  |   (logica de negocio)   |   |
+ |  |  PaymentGrpcService     |  |   |  |   (logica de negocio)   |  |
  |  |  (camada gRPC)          |  |   |  +----------+--------------+  |
  |  +----------+--------------+  |   |             |                 |
  |             |                 |   |             v                 |
